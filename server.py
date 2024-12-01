@@ -26,6 +26,10 @@ while True:
             context.destroy()
             break
         else:
-            data_rows = message.split('\n')
+            review = message.split('\n')
+            print(review)
+            with open(REVIEWS, "a", newline="") as f:
+                writer = csv.writer(f)
+                writer.writerow(review)
 
-    socket.send_string("reply")
+    socket.send_string(f"Review added")
