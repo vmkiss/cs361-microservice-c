@@ -21,15 +21,21 @@ while True:
     message = socket.recv_string()
     time.sleep(1)
 
+    result = "Error: Review could not be saved."
+
     if message:
         if message.lower() == 'q':
             context.destroy()
             break
         else:
             review = message.split('\n')
-            print(review)
+            title = review[1]
+            artist = review[2]
+
             with open(REVIEWS, "a", newline="") as f:
                 writer = csv.writer(f)
                 writer.writerow(review)
 
-    socket.send_string(f"Review added")
+            result = f"Review added for {title} by {artist}."
+
+        socket.send_string(result)
