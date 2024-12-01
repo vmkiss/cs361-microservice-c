@@ -27,3 +27,5 @@ while True:
             break
         else:
             data_rows = message.split('\n')
+
+    socket.send_string("reply")
